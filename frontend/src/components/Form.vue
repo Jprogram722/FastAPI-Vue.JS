@@ -5,7 +5,13 @@
         <label for="name">Name:</label>
         <input type="text" name="name" v-model="name">
         <label for="catagory">Catagory:</label>
-        <input type="text" name="description" v-model="catagory">
+        <select name="catagory" v-model="catagory">
+          <option value="electronics">Electronics</option>
+          <option value="transportation">Transportation</option>
+          <option value="education">Education</option>
+          <option value="sports">Sports</option>
+          <option value="equipment">Tools And Equipment</option>
+        </select>
         <label for="description">Description:</label>
         <input type="text" name="description" v-model="description">
         <label for="price">Price:</label>

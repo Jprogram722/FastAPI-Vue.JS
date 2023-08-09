@@ -10,16 +10,7 @@
   </header>
 
   <body>
-    <div class="grid-container">
-      <div class="grid-item" v-for="product in products">
-        <img v-bind:src="product.img_path" alt="No Image Found">
-        <p class="product-name">{{ product.name }}</p>
-        <p class="product-id">Product number: #{{ product.id }}</p>
-        <p class="product-catagory">category: {{ product.catagory }}</p>
-        <p class="product-price">${{ product.price }}</p>
-        <p class="product-stock">{{ product.stock }} left in stock</p>
-      </div>
-    </div>
+    <Items :products="products"/>
     <Form @submitForm="handleSubmit"/>
     <DelForm @submitDelete="handleDelete"/>
   </body>
@@ -30,10 +21,11 @@ import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import Form from './components/Form.vue';
 import DelForm from './components/DelForm.vue';
+import Items from './components/Items.vue';
 
 export default{
   name: 'main app',
-  components: {Form, DelForm},
+  components: {Form, DelForm, Items},
   setup() {
     
     const defaultURL = 'http://localhost:8000/api';
@@ -104,31 +96,6 @@ export default{
     height: 250px;
   }
 
-  .grid-container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 10px;
-    grid-gap: 50px;
-    margin: 20px 200px;
-  }
-
-  .grid-item{
-    border: 1px solid #a1a1aa;
-    border-radius: 10px;
-    background-color: #171717;
-    padding: 10px;
-    width: 250px;
-    word-wrap: break-word;
-  }
-
-  .grid-item > p {
-    width: 250px;
-  }
-
-  .grid-item > .product-price{
-    font-weight: bolder;
-    font-size: x-large;
-  }
   .btn{
     padding: 10px;
     cursor: pointer;

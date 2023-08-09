@@ -1,0 +1,83 @@
+<template>
+    <div class="form-container">
+      <form action="#" @submit.prevent="handleSubmit">
+        <div>Enter A Product</div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" v-model="name">
+        <label for="catagory">Catagory:</label>
+        <input type="text" name="description" v-model="catagory">
+        <label for="description">Description:</label>
+        <input type="text" name="description" v-model="description">
+        <label for="price">Price:</label>
+        <input type="number" name="price" step="any" v-model="price">
+        <label for="stock">Stock:</label>
+        <input type="number" name="stock" v-model="stock">
+        <label for="product-img">Image:</label>
+        <input type="file" name="product-img" @change="getFile">
+        <button class="btn">Submit Form</button>
+      </form>
+    </div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+    name: "Form Component",
+    setup (props, context) {
+        const name = ref('');
+        const catagory = ref('');
+        const price = ref('');
+        const stock = ref('');
+        const description = ref('');
+        const img = ref('');
+
+        let fileName;
+
+        const getFile = (e) => {
+            fileName = e.target.files[0].name;
+            console.log(fileName);
+        }
+
+        function handleSubmit() {
+            context.emit('submitForm', {
+                name: name.value,
+                catagory: catagory.value,
+                price: price.value,
+                stock: stock.value,
+                description: description.value,
+                img_file: fileName
+            })
+        }
+
+        return {handleSubmit, getFile, name, catagory, price, stock, description, img}
+    }
+}
+</script>
+
+<style>
+    .form-container{
+    margin: 20px auto;
+    padding: 30px;
+    width: min-content;
+    background-color: #171717;
+    border: 1px solid #a1a1aa;
+    border-radius: 10px;
+  }
+
+  .form-container > form > div{
+    font-size: larger;
+    margin-bottom: 20px;
+  }
+
+  .form-container > form > label{
+    font-size: larger;
+  }
+
+  .form-container > form > input{
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 350px;
+    font-size: 18px;
+  }
+</style>

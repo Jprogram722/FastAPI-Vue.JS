@@ -20,97 +20,49 @@
         <p class="product-stock">{{ product.stock }} left in stock</p>
       </div>
     </div>
-    <div class="form-container">
-      <form action="#" @submit="handleSubmit">
-        <div>Enter A Product</div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" v-model="name">
-        <label for="catagory">Catagory:</label>
-        <input type="text" name="description" v-model="catagory">
-        <label for="description">Description:</label>
-        <input type="text" name="description" v-model="description">
-        <label for="price">Price:</label>
-        <input type="number" name="price" step="any" v-model="price">
-        <label for="stock">Stock:</label>
-        <input type="number" name="stock" v-model="stock">
-        <label for="product-img">Image:</label>
-        <input type="file" name="product-img" @change="getFile">
-        <button class="btn">Submit Form</button>
-      </form>
-    </div>
-
-    <div class="form-container">
-      <form action="#" @submit="handleDelete">
-        <div>Delect a Product by Product Number</div>
-        <label for="ID">Product Number:</label>
-        <input type="number" name="ID" v-model="ID">
-        <button class="btn">Submit Form</button>
-      </form>
-    </div>
+    <Form @submitForm="handleSubmit"/>
+    <DelForm @submitDelete="handleDelete"/>
   </body>
 </template>
 
 <script>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import Form from './components/Form.vue';
+import DelForm from './components/DelForm.vue';
 
 export default{
   name: 'main app',
-  
+  components: {Form, DelForm},
   setup() {
     
-    const defaultURL = 'http://localhost:8000/api'
-
-    const name = ref('');
-    const catagory = ref('');
-    const price = ref('');
-    const stock = ref('');
-    const description = ref('');
-    const ID = ref('');
-    const img = ref('');
+    const defaultURL = 'http://localhost:8000/api';
+    
     const products = ref([]);
-    let fileName = '';
 
     onMounted(async () => {
       try{
         const {data} = await axios.get(defaultURL+'/');
-        console.log(data[0].img_path)
         products.value = data
-        for(let i = 0; i < products.value.length; ++i){
-          console.log(typeof products.value[i].img_path)
-        }
       }
       catch(err){
         console.log(err.message);
       }
     })
 
-    const getFile = (e) => {
-      fileName = e.target.files[0].name;
-      console.log(fileName)
-    }
-
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (formInfo) => {
       try{
-        const formData = {
-          name: name.value,
-          catagory: catagory.value,
-          description: description.value,
-          price: price.value,
-          stock: stock.value,
-          img_file: fileName
-        }
-        await axios.post(defaultURL + '/form', formData);
-        // window.location.reload();
+        await axios.post(defaultURL + '/form', formInfo);
+        window.location.reload();
       }
       catch(err){
         console.log(err.message);
       }
     }
     
-    const handleDelete = async () => {
+    const handleDelete = async (formInfo) => {
       try{
-        await axios.delete(defaultURL + '/delete/' + ID.value);
+        await axios.delete(defaultURL + '/delete/' + formInfo.id);
         window.location.reload();
       }
       catch(err){
@@ -118,12 +70,12 @@ export default{
       }
     }
 
-    return {handleSubmit, handleDelete, getFile, name, catagory, price, stock, description, ID, img, products}
+    return {handleSubmit, handleDelete, products}
   }
 }
 </script>
 
-<style scoped>
+<style>
   .navbar{
     display: flex;
     align-items: center;
@@ -192,30 +144,5 @@ export default{
 
   .purchase-btn{
     width: 250px;
-  }
-
-  .form-container{
-    margin: 20px auto;
-    padding: 30px;
-    width: min-content;
-    background-color: #171717;
-    border: 1px solid #a1a1aa;
-    border-radius: 10px;
-  }
-
-  .form-container > form > div{
-    font-size: larger;
-    margin-bottom: 20px;
-  }
-
-  .form-container > form > label{
-    font-size: larger;
-  }
-
-  .form-container > form > input{
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 350px;
-    font-size: 18px;
   }
 </style>

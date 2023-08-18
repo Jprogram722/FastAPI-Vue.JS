@@ -4,7 +4,6 @@ This will be the backend to the ecommerce website using fastapi and SQL for the 
 See Docs for FastAPI on how to use it
 """
 
-from typing import Optional
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
@@ -47,7 +46,7 @@ async def create_product(product: ProductSchema, db: Session = Depends(get_db)):
     db_item = crud.create_product_item(db, product)
     return db_item
 
-@app.patch('/api/update/{product_id}', response_model=UpdateProductSchema)
+@app.patch('/api/update/{product_id}')
 def update_product(product_id: int, product: UpdateProductSchema , db: Session = Depends(get_db)):
     updated_product = crud.update_one_product(db, product_id, product)
     if updated_product is None:

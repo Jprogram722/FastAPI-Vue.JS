@@ -22,6 +22,9 @@ def get_products(db: Session, skip: int = 0, limit: int = 100) -> list[dict[any,
     return res
 
 def create_product_item(db: Session, item: shemas.ProductSchema) -> models.ProductModel:
+    """
+    This function will create a new product and insert it into the database
+    """
     img_path = get_img_path(item.img_file)
 
     db_category = check_uniqueness(item.category, db)
@@ -40,12 +43,16 @@ def create_product_item(db: Session, item: shemas.ProductSchema) -> models.Produ
     return db_product
 
 def update_one_product(db: Session, product_id: int, product: shemas.UpdateProductSchema) -> models.ProductModel:
-    staged_product = db.query(models.ProductModel).filter(models.ProductModel.id == product_id).first()
+    """
+    This function will update a products details
+    """
+    staged_product = db.query(models.ProductModel).filter_by(id = product_id).first()
+    
     if staged_product is not None:
         if product.name != None:
             staged_product.name = product.name
         if product.category != None:
-            staged_product.category = product.category
+            staged_product.category = check_uniqueness(product.category, db)
         if product.description != None:
             staged_product.description = product.description
         if product.price != None:
@@ -56,6 +63,9 @@ def update_one_product(db: Session, product_id: int, product: shemas.UpdateProdu
     return staged_product
 
 def delete_one_product(db:Session, product_id: int) -> models.ProductModel:
+    """
+    This function will delete a product from the database
+    """
     staged_product = db.query(models.ProductModel).filter(models.ProductModel.id == product_id).first()
     if staged_product is not None:
         db.delete(staged_product)

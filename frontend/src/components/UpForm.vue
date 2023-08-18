@@ -1,7 +1,9 @@
 <template>
     <div class="form-container">
-      <form action="#" @submit.prevent="handleSubmit">
-        <div>Enter A Product</div>
+      <form action="#" @submit.prevent="handleUpdate">
+        <div>Update A Product By Product ID</div>
+        <label for="ID">Product Number:</label>
+        <input type="number" name="ID" v-model="ID">
         <label for="name">Name:</label>
         <input type="text" name="name" v-model="name">
         <label for="catagory">Catagory:</label>
@@ -29,23 +31,25 @@
 import { ref } from 'vue';
 
 export default {
-    name: "Form Component",
+    name: 'Update form component',
     setup (props, context) {
-        const name = ref('');
-        const category = ref('');
-        const price = ref('');
-        const stock = ref('');
-        const description = ref('');
+        const ID = ref(null);
+        const name = ref(null);
+        const category = ref(null);
+        const price = ref(null);
+        const stock = ref(null);
+        const description = ref(null);
 
-        let fileName;
+        let fileName = null
 
         const getFile = (e) => {
             fileName = e.target.files[0].name;
             console.log(fileName);
         }
 
-        function handleSubmit() {
-            context.emit('submitForm', {
+        function handleUpdate() {
+            context.emit('submitUpdate', {
+                id: ID.value,
                 name: name.value,
                 category: category.value,
                 price: price.value,
@@ -55,34 +59,11 @@ export default {
             })
         }
 
-        return {handleSubmit, getFile, name, category, price, stock, description}
+        return {handleUpdate, getFile, ID, name, category, price, stock, description}
     }
 }
 </script>
 
 <style>
-    .form-container{
-    margin: 20px auto;
-    padding: 30px;
-    width: min-content;
-    background-color: #171717;
-    border: 1px solid #a1a1aa;
-    border-radius: 10px;
-  }
 
-  .form-container > form > div{
-    font-size: larger;
-    margin-bottom: 20px;
-  }
-
-  .form-container > form > label{
-    font-size: larger;
-  }
-
-  .form-container > form > input{
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 350px;
-    font-size: 18px;
-  }
 </style>

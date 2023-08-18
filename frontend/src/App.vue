@@ -12,6 +12,7 @@
   <body>
     <Items :products="products"/>
     <Form @submitForm="handleSubmit"/>
+    <UpForm @submitUpdate="handleUpdate"/>
     <DelForm @submitDelete="handleDelete"/>
   </body>
 </template>
@@ -22,10 +23,11 @@ import { ref, onMounted } from 'vue';
 import Form from './components/Form.vue';
 import DelForm from './components/DelForm.vue';
 import Items from './components/Items.vue';
+import UpForm from './components/UpForm.vue';
 
 export default{
   name: 'main app',
-  components: {Form, DelForm, Items},
+  components: { Form, DelForm, Items, UpForm },
   setup() {
     
     const defaultURL = 'http://localhost:8000/api';
@@ -62,7 +64,18 @@ export default{
       }
     }
 
-    return {handleSubmit, handleDelete, products}
+    const handleUpdate = async (formInfo) => {
+      try{
+        console.log(formInfo);
+        await axios.patch(defaultURL+ '/update/' + formInfo.id, formInfo);
+        window.location.reload();
+      }
+      catch(err){
+        console.log(err.message);
+      }
+    }
+
+    return {handleSubmit, handleDelete, handleUpdate, products}
   }
 }
 </script>

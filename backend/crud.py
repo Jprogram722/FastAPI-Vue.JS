@@ -19,7 +19,7 @@ def create_product_item(db: Session, item: shemas.ProductSchema) -> models.Produ
 
     db_product = models.ProductModel(
         name = item.name,
-        catagory = item.catagory,
+        category = item.category,
         description = item.description,
         price = item.price,
         stock = item.stock,
@@ -35,8 +35,8 @@ def update_one_product(db: Session, product_id: int, product: shemas.UpdateProdu
     if staged_product is not None:
         if product.name != None:
             staged_product.name = product.name
-        if product.catagory != None:
-            staged_product.catagory = product.catagory
+        if product.category != None:
+            staged_product.category = product.category
         if product.description != None:
             staged_product.description = product.description
         if product.price != None:

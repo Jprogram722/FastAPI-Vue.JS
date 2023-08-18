@@ -4,7 +4,7 @@
         <img v-bind:src="product.img_path" alt="No Image Found">
         <p class="product-name">{{ product.name }}</p>
         <p class="product-id">Product number: #{{ product.id }}</p>
-        <p class="product-catagory">category: {{ product.catagory }}</p>
+        <p class="product-catagory">category: {{ product.category }}</p>
         <p class="product-price">${{ product.price }}</p>
         <p class="product-stock">{{ product.stock }} left in stock</p>
       </div>

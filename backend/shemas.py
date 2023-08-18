@@ -5,7 +5,7 @@ from pydantic import BaseModel
 class ProductSchema(BaseModel):
     id: int | None = None
     name: str
-    catagory: str
+    category: str
     description: str | None = None
     price: float
     stock: int
@@ -17,7 +17,7 @@ class ProductSchema(BaseModel):
 class UpdateProductSchema(BaseModel):
     id: int | None = None
     name: str | None = None
-    catagory: str | None = None
+    category: str | None = None
     description: str | None = None
     price: float | None = None
     stock: int | None = None

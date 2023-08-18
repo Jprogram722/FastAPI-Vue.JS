@@ -5,7 +5,7 @@
         <label for="name">Name:</label>
         <input type="text" name="name" v-model="name">
         <label for="catagory">Catagory:</label>
-        <select name="catagory" v-model="catagory">
+        <select name="catagory" v-model="category">
           <option value="electronics">Electronics</option>
           <option value="transportation">Transportation</option>
           <option value="education">Education</option>
@@ -32,7 +32,7 @@ export default {
     name: "Form Component",
     setup (props, context) {
         const name = ref('');
-        const catagory = ref('');
+        const category = ref('');
         const price = ref('');
         const stock = ref('');
         const description = ref('');
@@ -48,7 +48,7 @@ export default {
         function handleSubmit() {
             context.emit('submitForm', {
                 name: name.value,
-                catagory: catagory.value,
+                category: category.value,
                 price: price.value,
                 stock: stock.value,
                 description: description.value,
@@ -56,7 +56,7 @@ export default {
             })
         }
 
-        return {handleSubmit, getFile, name, catagory, price, stock, description, img}
+        return {handleSubmit, getFile, name, category, price, stock, description, img}
     }
 }
 </script>

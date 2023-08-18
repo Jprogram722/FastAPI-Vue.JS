@@ -8,7 +8,7 @@ class ProductModel(Base):
 
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
-    catagory = Column(String(255))
+    category = Column(String(255))
     description = Column(String(255), nullable=True)
     price = Column(Float)
     stock = Column(Integer)

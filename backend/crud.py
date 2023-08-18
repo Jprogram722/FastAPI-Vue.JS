@@ -1,10 +1,16 @@
 # this file contains all the controller function for the api
 
+import sqlalchemy.exc
 from sqlalchemy.orm import Session
 import models, shemas
+from helper import get_img_path
 import os
 
-def get_products(db: Session, skip: int = 0, limit: int = 100):
+def get_products(db: Session, skip: int = 0, limit: int = 100) -> list[dict[any, any]]:
+    """
+    This function will retreive the all of the products and the details about each product
+    and return them to the as a list of dictionaries
+    """
     data_db = db.query(
         models.ProductModel.id,
         models.ProductModel.name,
@@ -16,22 +22,23 @@ def get_products(db: Session, skip: int = 0, limit: int = 100):
 
     res = [dict(data._mapping) for data in data_db]
 
-    #test = [dict(data._mapping) for data in db.query(models.CategoryModel.category_name).all()]
-    #for category in test:
-    #    print(category['category_name'])
+    test = db.query(models.CategoryModel).all()
+    print(len(test))
+    for i, category in enumerate(test):
+        print(i, category.category_name)
     
     return res
 
 def create_product_item(db: Session, item: shemas.ProductSchema) -> models.ProductModel:
-    if item.img_file is not None:
-        pic_folder = '\\src\\pics\\'
-        img_path = pic_folder + item.img_file
-    else:
-        img_path = item.img_file
+    img_path = get_img_path(item.img_file)
 
-    db_category = models.CategoryModel(
-        category_name = item.category
-    )
+    for i, category in enumerate(db.query(models.CategoryModel).all()):
+        if (category.category_name == item.category):
+            db_category = db.query(models.CategoryModel).filter(models.CategoryModel.id == category.id).first()
+        elif (i == len(db.query(models.CategoryModel).all())):
+            db_category = models.CategoryModel(
+                category_name = item.category
+            )
 
     db_product = models.ProductModel(
         name = item.name,
@@ -46,7 +53,7 @@ def create_product_item(db: Session, item: shemas.ProductSchema) -> models.Produ
     db.refresh(db_product)
     return db_product
 
-def update_one_product(db: Session, product_id: int, product: shemas.UpdateProductSchema):
+def update_one_product(db: Session, product_id: int, product: shemas.UpdateProductSchema) -> models.ProductModel:
     staged_product = db.query(models.ProductModel).filter(models.ProductModel.id == product_id).first()
     if staged_product is not None:
         if product.name != None:
@@ -62,7 +69,7 @@ def update_one_product(db: Session, product_id: int, product: shemas.UpdateProdu
         db.commit()
     return staged_product
 
-def delete_one_product(db:Session, product_id: int) -> bool:
+def delete_one_product(db:Session, product_id: int) -> models.ProductModel:
     staged_product = db.query(models.ProductModel).filter(models.ProductModel.id == product_id).first()
     if staged_product is not None:
         db.delete(staged_product)

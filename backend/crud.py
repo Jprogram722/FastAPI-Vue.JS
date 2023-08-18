@@ -5,10 +5,22 @@ import models, shemas
 import os
 
 def get_products(db: Session, skip: int = 0, limit: int = 100):
-    #for product in db.query(models.ProductModel):
-    #    for col in product.__table__.columns:
-    #        print(col)
-    return db.query(models.ProductModel).all()
+    data_db = db.query(
+        models.ProductModel.id,
+        models.ProductModel.name,
+        models.CategoryModel.category_name,
+        models.ProductModel.price,
+        models.ProductModel.stock,
+        models.ProductModel.img_path
+    ).join(models.CategoryModel, models.ProductModel.category_id == models.CategoryModel.id).all()
+
+    res = [dict(data._mapping) for data in data_db]
+
+    #test = [dict(data._mapping) for data in db.query(models.CategoryModel.category_name).all()]
+    #for category in test:
+    #    print(category['category_name'])
+    
+    return res
 
 def create_product_item(db: Session, item: shemas.ProductSchema) -> models.ProductModel:
     if item.img_file is not None:
@@ -17,9 +29,13 @@ def create_product_item(db: Session, item: shemas.ProductSchema) -> models.Produ
     else:
         img_path = item.img_file
 
+    db_category = models.CategoryModel(
+        category_name = item.category
+    )
+
     db_product = models.ProductModel(
         name = item.name,
-        category = item.category,
+        category = db_category,
         description = item.description,
         price = item.price,
         stock = item.stock,

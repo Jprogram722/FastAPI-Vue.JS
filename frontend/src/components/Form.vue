@@ -65,8 +65,7 @@ export default {
     margin: 20px auto;
     padding: 30px;
     width: min-content;
-    background-color: #171717;
-    border: 1px solid #a1a1aa;
+    border: 2px solid #DFF1FF;
     border-radius: 10px;
   }
 

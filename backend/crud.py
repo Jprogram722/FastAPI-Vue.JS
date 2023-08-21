@@ -21,6 +21,24 @@ def get_products(db: Session, skip: int = 0, limit: int = 100) -> list[dict[any,
     res = [dict(data._mapping) for data in data_db]
     return res
 
+def get_one_product(db: Session, product_id: int) -> list[dict[any, any]]:
+    """
+    This function will only return 1 product by product id
+    """
+    data_db = db.query(
+        models.ProductModel.id,
+        models.ProductModel.name,
+        models.CategoryModel.category_name,
+        models.ProductModel.description,
+        models.ProductModel.price,
+        models.ProductModel.stock,
+        models.ProductModel.img_path
+    ).join(
+        models.CategoryModel, models.ProductModel.category_id == models.CategoryModel.id
+        ).filter(models.ProductModel.id == product_id).first()
+    
+    return dict(data_db._mapping)
+
 def create_product_item(db: Session, item: shemas.ProductSchema) -> models.ProductModel:
     """
     This function will create a new product and insert it into the database

@@ -2,16 +2,18 @@
     <div class="grid-container">
       <div class="grid-item" v-for="product in props.products">
         <img v-bind:src="product.img_path" alt="No Image Found">
-        <p class="product-name">{{ product.name }}</p>
+        <RouterLink :to="{name: 'product', params: {id: product.id}}"><p class="product-name">{{ product.name }}</p></RouterLink>
         <p class="product-id">Product number: #{{ product.id }}</p>
         <p class="product-catagory">category: {{ product.category_name }}</p>
         <p class="product-price">${{ product.price }}</p>
-        <p class="product-stock">{{ product.stock }} left in stock</p>
+        <p v-if="product.stock > 0"><i class="fa-solid fa-check check"></i> Avalible In Store</p>
       </div>
     </div>
 </template>
 
 <script>
+import { RouterLink } from 'vue-router';
+
 export default {
     name: 'Items Component',
     props: ['products'],
@@ -21,7 +23,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
     .grid-container{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -31,9 +33,9 @@ export default {
   }
 
   .grid-item{
-    border: 1px solid #a1a1aa;
+    border: 2px solid #DFF1FF;
     border-radius: 10px;
-    background-color: #171717;
+    background-color: #1e293b;
     padding: 10px;
     width: 250px;
     word-wrap: break-word;
@@ -46,5 +48,20 @@ export default {
   .grid-item > .product-price{
     font-weight: bolder;
     font-size: x-large;
+  }
+
+  .product-name{
+    font-size: large;
+    font-weight: bold;
+    width: 250px;
+  }
+  
+  .product-name:hover{
+    width: 250px;
+    background-color: #334155;
+  }
+
+  .check{
+    color: #4ade80;
   }
 </style>

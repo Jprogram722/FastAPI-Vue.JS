@@ -1,6 +1,6 @@
 # this file will contain the SQL models and creates tables in the database based on these modesl
 
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, UniqueConstraint
+from sqlalchemy import Column, Integer, String, Float, ForeignKey, UniqueConstraint, Text
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -19,7 +19,7 @@ class ProductModel(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(255))
     category_id = Column(Integer, ForeignKey('category.id'))
-    description = Column(String(255), nullable=True)
+    description = Column(Text, nullable=True)
     price = Column(Float)
     stock = Column(Integer)
     img_path = Column(String(255), nullable=True)

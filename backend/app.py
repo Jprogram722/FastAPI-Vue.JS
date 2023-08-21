@@ -41,6 +41,11 @@ async def retreve_products(skip:int=0, limit: int = 100, db: Session = Depends(g
     products = crud.get_products(db)
     return products
 
+@app.get('/api/get_one/{product_id}')
+async def retreve_product(product_id: int, db: Session = Depends(get_db)):
+    product = crud.get_one_product(db, product_id)
+    return product
+
 @app.post('/api/form')
 async def create_product(product: ProductSchema, db: Session = Depends(get_db)):
     db_item = crud.create_product_item(db, product)

@@ -9,6 +9,7 @@
             <p class="product-category">Category: {{ product.category_name }}</p>
             <p class="product-category">Overview: {{ product.description }}</p>
             <p v-if="product.stock > 0"><i class="fa-solid fa-check check"></i> Avalible In Store</p>
+            <p v-else><i class="fa-solid fa-x" style="color: #d73737;"></i> Not in Stock</p>
             <button class="btn">Add To Cart</button>
         </div>
     </div>

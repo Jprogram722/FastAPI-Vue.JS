@@ -16,5 +16,12 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <style>
+  .navbar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 65rem;
+  padding: 30px;
+}
 
 </style>

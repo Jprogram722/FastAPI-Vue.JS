@@ -54,10 +54,8 @@ select {
 .navbar{
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  gap: 40rem;
-  margin: auto 0;
+  justify-content: center;
+  padding: 30px;
 }
 
 ul{

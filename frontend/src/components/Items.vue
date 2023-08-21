@@ -7,6 +7,7 @@
         <p class="product-catagory">category: {{ product.category_name }}</p>
         <p class="product-price">${{ product.price }}</p>
         <p v-if="product.stock > 0"><i class="fa-solid fa-check check"></i> Avalible In Store</p>
+        <p v-else><i class="fa-solid fa-x" style="color: #d73737;"></i> Not in Stock</p>
       </div>
     </div>
 </template>

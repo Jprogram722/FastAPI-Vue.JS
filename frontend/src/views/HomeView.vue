@@ -99,17 +99,17 @@ export default{
   }
 
   .btn{
-    color: #DFF1FF;
+    color: #1e293b;
     padding: 10px;
     cursor: pointer;
-    background-color: #475569;
+    background-color: #daa21c;
     border: none;
     border-radius: 10px;
     font-size: larger;
   }
 
   .btn:hover{
-    background-color: #334155;
+    background-color: #b18110;
   }
 
   .purchase-btn{

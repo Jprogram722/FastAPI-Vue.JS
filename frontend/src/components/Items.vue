@@ -52,6 +52,7 @@ export default {
   }
 
   .product-name{
+    text-align: center;
     font-size: large;
     font-weight: bold;
     width: 250px;
@@ -60,6 +61,7 @@ export default {
   .product-name:hover{
     width: 250px;
     background-color: #334155;
+    border-radius: 10px;
   }
 
   .check{

@@ -3,7 +3,7 @@
         <div>
             <img class="product-img" :src="product.img_path" alt="No Image Found">
         </div>
-        <div>
+        <div class="product-details">
             <h1 class="product-name">{{ product.name }}</h1>
             <h1 class="product-price">${{ product.price }}</h1>
             <p class="product-category">Category: {{ product.category_name }}</p>
@@ -41,10 +41,10 @@ export default {
 <style>
     .wrapper{
         padding-top: 35px;
-        width: 80%;
-        margin: 0 auto;
         display: grid;
-        grid-template-columns: 60% 40%;
+        grid-template-columns: 50% 50%;
+        width: 70%;
+        margin: 0 auto;
     }
 
     .product-img{
@@ -59,5 +59,12 @@ export default {
 
     .check{
         color: #4ade80;
+    }
+
+    .product-details{
+        background-color: #334155;
+        padding: 30px;
+        border: none;
+        border-radius: 10px;
     }
 </style>

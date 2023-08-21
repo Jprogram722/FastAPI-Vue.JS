@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="navbar">
-      <h1>Fast API test with vue JS</h1>
+      <h1>Ecommerce Mockup Website</h1>
       <ul>
         <li><a href="#">About</a></li>
       </ul>
@@ -21,7 +21,6 @@ import { RouterLink, RouterView } from 'vue-router'
   align-items: center;
   justify-content: center;
   gap: 65rem;
-  padding: 30px;
 }
 
 </style>

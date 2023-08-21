@@ -34,10 +34,9 @@ export default {
   }
 
   .grid-item{
-    border: 2px solid #DFF1FF;
+    background-color: #334155;
     border-radius: 10px;
-    background-color: #1e293b;
-    padding: 10px;
+    padding: 15px;
     width: 250px;
     word-wrap: break-word;
   }
@@ -60,7 +59,7 @@ export default {
   
   .product-name:hover{
     width: 250px;
-    background-color: #334155;
+    background-color: #1e293b;
     border-radius: 10px;
   }
 

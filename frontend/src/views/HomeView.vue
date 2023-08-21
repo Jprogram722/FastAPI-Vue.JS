@@ -82,9 +82,9 @@ export default{
   .navbar{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 10px;
-    gap: 40rem;
+    gap: 65rem;
     margin: auto 0;
   }
 

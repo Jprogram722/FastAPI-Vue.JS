@@ -1,9 +1,7 @@
 <template>
     <div class="form-container">
       <form action="#" @submit.prevent="handleUpdate">
-        <div>Update A Product By Product ID</div>
-        <label for="ID">Product Number:</label>
-        <input type="number" name="ID" v-model="ID">
+        <div>Update Product Info</div>
         <label for="name">Name:</label>
         <input type="text" name="name" v-model="name">
         <label for="catagory">Catagory:</label>
@@ -33,7 +31,6 @@ import { ref } from 'vue';
 export default {
     name: 'Update form component',
     setup (props, context) {
-        const ID = ref(null);
         const name = ref(null);
         const category = ref(null);
         const price = ref(null);
@@ -48,18 +45,17 @@ export default {
         }
 
         function handleUpdate() {
-            context.emit('submitUpdate', {
-                id: ID.value,
-                name: name.value,
-                category: category.value,
-                price: price.value,
-                stock: stock.value,
-                description: description.value,
-                img_file: fileName
-            })
+          context.emit('submitUpdate', {
+              name: name.value,
+              category: category.value,
+              price: price.value,
+              stock: stock.value,
+              description: description.value,
+              img_file: fileName
+          });
         }
 
-        return {handleUpdate, getFile, ID, name, category, price, stock, description}
+        return {handleUpdate, getFile, name, category, price, stock, description}
     }
 }
 </script>

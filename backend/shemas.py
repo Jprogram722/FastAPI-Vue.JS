@@ -15,7 +15,6 @@ class ProductSchema(BaseModel):
         from_attributes = True
 
 class UpdateProductSchema(BaseModel):
-    id: int
     name: str | None = None
     category: str | None = None
     description: str | None = None

@@ -3,3 +3,5 @@ backend/.env
 backend/__pycache__
 frontend/node_modules
 venv
+# Local Netlify folder
+.netlify

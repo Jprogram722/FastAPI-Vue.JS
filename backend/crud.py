@@ -13,6 +13,7 @@ def get_products(db: Session, skip: int = 0, limit: int = 100) -> list[dict[any,
         models.ProductModel.id,
         models.ProductModel.name,
         models.CategoryModel.category_name,
+        models.ProductModel.description,
         models.ProductModel.price,
         models.ProductModel.stock,
         models.ProductModel.img_path

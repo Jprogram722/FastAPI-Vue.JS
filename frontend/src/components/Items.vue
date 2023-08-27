@@ -1,6 +1,7 @@
 <template>
     <div class="grid-container">
       <div class="grid-item" v-for="product in props.products">
+        <button class="del-btn" @click.left="deleteProduct(product.id)"><i class="fa-solid fa-x"></i></button>
         <img v-bind:src="product.img_path" alt="No Image Found">
         <RouterLink :to="{name: 'product', params: {id: product.id}}"><p class="product-name">{{ product.name }}</p></RouterLink>
         <p class="product-id">Product number: #{{ product.id }}</p>
@@ -13,13 +14,19 @@
 </template>
 
 <script>
+import axios from 'axios';
 import { RouterLink } from 'vue-router';
 
 export default {
     name: 'Items Component',
     props: ['products'],
     setup (props, context) {
-        return {props}
+
+      const deleteProduct = async (product_id) => {
+          context.emit('deleteProduct', {id: product_id});
+      }
+
+      return {props, deleteProduct}
     }
 }
 </script>
@@ -55,6 +62,7 @@ export default {
     font-size: large;
     font-weight: bold;
     width: 250px;
+    transition: all 75ms;
   }
   
   .product-name:hover{
@@ -65,5 +73,22 @@ export default {
 
   .check{
     color: #4ade80;
+  }
+
+  .del-btn {
+    cursor: pointer;
+    float: right;
+    padding: 5px 7px 5px 7px;
+    margin-bottom: 10px;
+    color: #d73737;
+    background-color: #334155;
+    border: none;
+    border-radius: 50px;
+    transition: all 75ms;
+  }
+
+  .del-btn:hover {
+    background-color: #d73737;
+    color: #334155;
   }
 </style>

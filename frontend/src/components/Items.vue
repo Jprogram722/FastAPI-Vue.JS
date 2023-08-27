@@ -78,7 +78,7 @@ export default {
   .del-btn {
     cursor: pointer;
     float: right;
-    padding: 5px 7px 5px 7px;
+    padding: 5px 9px 5px 9px;
     margin-bottom: 10px;
     color: #d73737;
     background-color: #334155;

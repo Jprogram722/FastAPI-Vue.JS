@@ -64,3 +64,12 @@ a{
 a:hover{
   border-bottom: 1px solid #DFF1FF;
 }
+
+textarea {
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto Slab', serif;
+  color: #DFF1FF;
+  background-color: #1e293b;
+  width: 375px;
+  height: 180px;
+}

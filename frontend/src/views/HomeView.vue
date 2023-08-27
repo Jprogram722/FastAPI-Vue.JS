@@ -15,9 +15,8 @@
         </div>
       </div>
     </div>
-    <div class="spinner-container" v-else>
-      <div class="spinner"></div>
-      <p>Now Loading...</p>
+    <div v-else>
+      <Spinner/>
     </div>
     <Items :products="products" @deleteProduct="handleDelete"/>
   </div>
@@ -31,10 +30,11 @@ import Form from '../components/form.vue';
 import Items from '../components/Items.vue';
 import Modal from '../components/Modal.vue';
 import Navbar from '../components/Navbar.vue';
+import Spinner from '../components/Spinner.vue';
 
 export default{
   name: 'main app',
-  components: { Form, Items, Modal, Navbar },
+  components: { Form, Items, Modal, Navbar, Spinner},
   setup() {
     
     const defaultURL = 'http://localhost:8000/api';
@@ -164,30 +164,5 @@ export default{
 
   .large-text {
     font-size: larger;
-  }
-
-  .spinner-container {
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-  }
-
-  .spinner {
-    border: 6px solid #DAA21C;
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    border-top-color: #DFF1FF;
-    animation: spin 1s infinite ease-in-out;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 </style>

@@ -3,7 +3,7 @@
         <UpForm @submitUpdate="handleUpdate"/>
     </Modal>
     <Navbar/>
-    <div class="wrapper">
+    <div class="wrapper" v-if="product">
         <div>
             <img class="product-img" :src="product.img_path" alt="No Image Found">
         </div>
@@ -19,6 +19,9 @@
             <button class="btn" @click.left="productInCart(product.stock)">Add To Cart</button>
         </div>
     </div>
+    <div v-else>
+        <Spinner/>
+    </div>
 </template>
 
 <script>
@@ -27,10 +30,11 @@ import axios from 'axios';
 import Navbar from '../components/Navbar.vue';
 import UpForm from '../components/UpForm.vue';
 import Modal from '../components/Modal.vue';
+import Spinner from '../components/Spinner.vue';
 
 export default {
     name: "Product View",
-    components: { Navbar, UpForm, Modal },
+    components: { Navbar, UpForm, Modal, Spinner, Spinner },
     props: ['id'],
     setup(props, context) {
         const defaultURL = 'http://localhost:8000/api';

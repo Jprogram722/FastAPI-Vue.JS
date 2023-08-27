@@ -41,7 +41,7 @@ export default {
 
     .container{
         display: block;
-        margin: 150px auto;
+        margin: 80px auto;
         width: min-content;
     }
 

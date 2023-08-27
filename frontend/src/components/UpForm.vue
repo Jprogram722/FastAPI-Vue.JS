@@ -13,7 +13,7 @@
           <option value="equipment">Tools And Equipment</option>
         </select>
         <label for="description">Description:</label>
-        <input type="text" name="description" v-model="description">
+        <textarea name="description" v-model="description"></textarea>
         <label for="price">Price:</label>
         <input type="number" name="price" step="any" v-model="price">
         <label for="stock">Stock:</label>
